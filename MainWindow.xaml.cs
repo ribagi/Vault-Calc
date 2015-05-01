@@ -59,7 +59,11 @@ namespace Vault_Calculator
                     v.y = Convert.ToInt32(Tail.Text);
                     v.checkDouble = check.IsChecked.Value;
 
-                    Cost.Text = Convert.ToString(v.Cost() + r.TotalCost()/ringDialog.Reinforce);
+                    int reinforceCost = 1;
+                    if (ringDialog != null)
+                        reinforceCost = ringDialog.Reinforce;
+
+                    Cost.Text = Convert.ToString(v.Cost() + r.TotalCost() / reinforceCost);
                     X_Time.Text = Convert.ToString(v.X_time(Int32.Parse(Speed.Text)));
                     Y_Time.Text = Convert.ToString(v.Y_time(Int32.Parse(Speed.Text)));
                     X.Text = Convert.ToString(v.X_layer());
@@ -117,28 +121,15 @@ namespace Vault_Calculator
 
         }
 
-        private void Cost_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void X_TextChanged(object sender, TextChangedEventArgs e)
         {
+            Calculate();
 
         }
 
         private void Y_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-        }
-
-        private void YTime_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void XTime_TextChanged(object sender, TextChangedEventArgs e)
-        {
+            Calculate();
 
         }
     }
