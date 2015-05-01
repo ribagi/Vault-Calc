@@ -17,6 +17,8 @@ namespace Vault_Calculator
         public int Rings { get { return _rings; } set { _rings = value; } }
         private int _space;
         public int Space { get { return _space; } set { _space = value; } }
+        private int _height;
+        public int Height { get { return _height; } set { _height = value; } }
 
         public Ring()
         {
@@ -34,7 +36,7 @@ namespace Vault_Calculator
                 _sum = SingleCost(r);
             }
 
-            return _sum;
+            return _sum * _height;
         }
 
         public int SingleCost(int r)

@@ -46,9 +46,10 @@ namespace Vault_Calculator
                 && Speed != null 
                 && v != null 
                 && r != null
-                && !Layer.Text.Equals("") 
-                && !Head.Text.Equals("") 
-                && !Tail.Text.Equals(""))
+                && !Layer.Text.Equals("")
+                && !Head.Text.Equals("")
+                && !Tail.Text.Equals("")
+                && !Speed.Text.Equals(""))
             {
                 try
                 {
@@ -58,7 +59,7 @@ namespace Vault_Calculator
                     v.y = Convert.ToInt32(Tail.Text);
                     v.checkDouble = check.IsChecked.Value;
 
-                    Cost.Text = Convert.ToString(v.Cost() + r.TotalCost());
+                    Cost.Text = Convert.ToString(v.Cost() + r.TotalCost()/ringDialog.Reinforce);
                     X_Time.Text = Convert.ToString(v.X_time(Int32.Parse(Speed.Text)));
                     Y_Time.Text = Convert.ToString(v.Y_time(Int32.Parse(Speed.Text)));
                     X.Text = Convert.ToString(v.X_layer());

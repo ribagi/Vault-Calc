@@ -31,8 +31,9 @@ namespace Vault_Calculator
         public string StartText { get; set; }
         public string NumberText { get; set; }
         public string SpaceText { get; set; }
-        public string Reinforce { get; set; }
+        public string ReinforceText { get; set; }
         public int Total { get; set; }
+        public int Reinforce { get; set; }
 
         public RingDialog()
         {
@@ -48,23 +49,34 @@ namespace Vault_Calculator
 
         private void Calculate()
         {
-            if (ReinforcementsTotal != null && DiamondsTotal != null)
+            if (ReinforcementsTotal != null 
+                && DiamondsTotal != null
+                && Start != null
+                && Rings != null
+                && Space != null
+                && Height != null
+                && !Start.Text.Equals("")
+                && !Number.Text.Equals("")
+                && !Space.Text.Equals("")
+                && !ReinforceCost.Text.Equals("")
+                && !Height.Text.Equals(""))
             {
                 try
                 {
                     _rings.Start = Int32.Parse(Start.Text);
                     _rings.Rings = Int32.Parse(Number.Text);
                     _rings.Space = Int32.Parse(Space.Text);
+                    _rings.Height = Int32.Parse(Height.Text);
+                    Reinforce = Int32.Parse(ReinforceCost.Text);
                     int total = _rings.TotalCost();
-                    int reinforce = Int32.Parse(ReinforceCost.Text);
                     ReinforcementsTotal.Text = (total).ToString();
-                    DiamondsTotal.Text = ((int)Math.Ceiling((double)total / reinforce)).ToString();
+                    DiamondsTotal.Text = ((int)Math.Ceiling((double)total / Reinforce)).ToString();
 
                     StartText = Start.Text;
                     NumberText = Number.Text;
                     SpaceText = Space.Text;
                     Total = total;
-                    Reinforce = ReinforceCost.Text;
+                    ReinforceText = ReinforceCost.Text;
                     ReinforcementTotalText = ReinforcementsTotal.Text;
                     DiamondsTotalText = DiamondsTotal.Text;
 
@@ -126,6 +138,11 @@ namespace Vault_Calculator
         }
 
         private void ReinforcementCost_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Calculate();
+        }
+
+        private void Height_TextChanged(object sender, TextChangedEventArgs e)
         {
             Calculate();
         }
